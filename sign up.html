@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sign up page</title>
+    <link rel="stylesheet" href="sign up.css">
+</head>
+<body>
+    <div class="form">
+        <input type="email" id="email" placeholder="Enter Email" required>
+        <input type="password" id="password" placeholder="Create Password" required>
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+        <button type="submit"><a href="Login.html">sign up</a></button>
+    </form>
+    </div>
+</body>
+<script>
+    document.querySelector(".btnn").addEventListener("click", function() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+
+        fetch('http://127.0.0.1:5000/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            if (data.message) {
+                alert(data.message);
+            } else {
+                alert(data.error);
+            }
+        });
+    });
+</script>
+</body>
+</html>

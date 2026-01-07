@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 60%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .order-details {
+            margin-bottom: 30px;
+        }
+        .payment-methods {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+        .payment-method {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .payment-method:hover {
+            background-color: #f0f0f0;
+        }
+        .credit-card-form, .qr-container {
+            display: none;
+            margin-top: 20px;
+        }
+        .credit-card-form input, .credit-card-form button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .qr-container {
+            text-align: center;
+        }
+        #qr-code {
+            max-width: 200px;
+            max-height: 200px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .notification {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Order Details</h2>
+    <div class="order-details">
+        <p><strong>Product:</strong>  <input type="text" id="username" placeholder="product name" required /></p>
+        <p><strong>Quantity:</strong>  <input type="number" placeholder="Quantity" required /></p>
+        <p><strong>Total Price:</strong>  <input type="number"placeholder="Amount" required /></p>
+    </div>
+
+    <h3>Proceed to Payment</h3>
+    <button onclick="showPaymentMethods()">Proceed to Payment</button>
+
+    <!-- Payment Methods -->
+    <div class="payment-methods" id="payment-methods" style="display: none;">
+        <div class="payment-method" onclick="selectPaymentMethod('credit')">Credit Card</div>
+        <div class="payment-method" onclick="selectPaymentMethod('paypal')">PayPal</div>
+    </div>
+
+    <!-- Credit Card Form -->
+    <div class="credit-card-form" id="credit-card-form">
+        <h3>Enter Credit Card Details</h3>
+        <input type="text" id="cc-number" placeholder="Card Number">
+        <input type="text" id="cc-expiry" placeholder="Expiry Date (MM/YY)">
+        <input type="text" id="cc-cvc" placeholder="CVC">
+        <button onclick="confirmPayment('credit')">Confirm Credit Card Payment</button>
+    </div>
+
+    <!-- PayPal QR -->
+    <div class="qr-container" id="paypal-qr-container">
+        <h4>Scan PayPal QR to Pay</h4>
+        <img id="qr-code" src="" alt="QR Code">
+        <img src="./images/qr.jpg" alt="QR Code">
+        <button onclick="confirmPayment('paypal')">Confirm PayPal Payment</button>
+    </div>
+
+    <!-- Payment Status Notification -->
+    <div class="notification" id="payment-notification">
+        Payment Successful! Thank you for your purchase.
+        <a href="order.html"><button>Orders Details</button></a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode"></script>
+<script>
+    function showPaymentMethods() {
+        document.getElementById("payment-methods").style.display = 'block';
+    }
+
+    function selectPaymentMethod(paymentMethod) {
+        const creditCardForm = document.getElementById("credit-card-form");
+        const paypalQrContainer = document.getElementById("paypal-qr-container");
+        const paymentMethods = document.getElementById("payment-methods");
+
+        // Hide the payment methods selection
+        paymentMethods.style.display = 'none';
+
+        // Show relevant payment method details
+        if (paymentMethod === 'credit') {
+            creditCardForm.style.display = 'block';
+            paypalQrContainer.style.display = 'none';
+        } else if (paymentMethod === 'paypal') {
+            creditCardForm.style.display = 'none';
+            paypalQrContainer.style.display = 'block';
+            generatePayPalQR();
+        }
+    }
+
+    function generatePayPalQR() {
+        const qrCode = document.getElementById("qr-code");
+        qrCode.src = 'https://api.qrserver.com/v1/create-qr-code/?data=PayPalPayment&size=200x200';
+    }
+
+    function confirmPayment(paymentMethod) {
+        const notification = document.getElementById("payment-notification");
+
+        // Simulate a payment process based on the selected method
+        if (paymentMethod === 'credit') {
+            const ccNumber = document.getElementById("cc-number").value;
+            const ccExpiry = document.getElementById("cc-expiry").value;
+            const ccCvc = document.getElementById("cc-cvc").value;
+
+            // Simple validation check for card details (not real validation)
+            if (ccNumber && ccExpiry && ccCvc) {
+                notification.style.display = 'block';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 3000);
+            } else {
+                alert("Please fill out all credit card details.");
+            }
+        } else if (paymentMethod === 'paypal') {
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+    }
+</script>
+
+</body>
+</html>

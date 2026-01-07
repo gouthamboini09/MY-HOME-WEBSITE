@@ -1,0 +1,154 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+body{
+  height: 100%;
+}
+
+/* Header */
+
+.menu.btn{
+  color: #424144;
+  font-size: 23px;
+  cursor: pointer;
+  display: none;
+}
+
+.navbar{
+  padding: 20px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0%;
+  z-index: 999;
+  background-color: #f3f4f6;
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.3);
+}
+
+.navbar .logo h1{
+  color: #424144;
+  border-bottom: 4px solid#fd6561;
+}
+
+.navbar .menu li{
+  list-style: none;
+  display: inline-block;
+}
+
+.navbar .menu li a{
+  display: block;
+  margin-left: 20px;
+  color: #424144;
+  border-bottom: 4px solid transparent;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.navbar .menu li .active{
+  border-bottom: 4px solid #f63e4e;
+}
+
+.navbar .menu li a i{
+  color: #f63e4e;
+
+}
+
+.navbar .menu li a:hover{
+  border-bottom: 4px solid #f63e4e;
+}
+
+/* content */
+
+.content{
+  background-image: url(shopp.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: #424144;
+  height: 100vh;
+}
+
+.content h1{
+  font-size: 40px;
+}
+
+.content p{
+  font-size: 40px;
+}
+
+.content p{
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.content button{
+  margin-top: 30px;
+  padding: 15px 30px;
+  border: none;
+  background: #f63e4e;
+  color: white;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pheading{
+  text-align: center;
+  margin: 50px 0;
+  color: #424144;
+}
+.gallery{
+    
+  display: flex;
+  flex-direction: row; 
+  column-gap: 20px;
+  flex-wrap: wrap;
+  row-gap: 10px;
+}
+
+div.desc {
+  text-align: center;
+  width: 100%;
+}
+
+.desc i{
+  float: left !important;
+  padding-left: 10px;
+}
+
+.desc button{
+  float:right !important;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.gallery img{
+  height: 250px;
+  width:200px;
+}
+
+.btn
+{
+  display: block;
+  border-radius: 5px;
+  color:white;
+  background-color: blue;
+  font-size:20px;
+  text-decoration: none;
+  width:fit-content;
+  height:fit-content;
+  padding:5px;
+}
+
+.btn:hover{
+  background-color: rgb(31, 199, 106)ue;
+}
